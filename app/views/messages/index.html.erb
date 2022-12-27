@@ -8,10 +8,8 @@
     <%= link_to 'New message', new_message_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 
-  <div id="messages" class="min-w-full">
+  <div id="messages" class="min-w-full" data-controller='websocket-message'>
     <%= render @messages %>
   </div>
 </div>
- <div data-controller='websocket-message'>
- </div>
 

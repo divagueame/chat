@@ -49,7 +49,14 @@ class MessagesController < ApplicationController
   private
     def send_message_to_all(message) 
       ## Main room is the room we would like to broadcast to and we can pass an object with the information we want to be sent.
-      ActionCable.server.broadcast("main_room", { message: message })
+      ActionCable.server.broadcast("main_room", { html: html(message) })
+    end
+
+    def html(message)
+      render_to_string(
+        partial: 'messages/message',
+        locals: { message: message }
+      )
     end
 
     def set_message
