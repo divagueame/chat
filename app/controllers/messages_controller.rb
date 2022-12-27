@@ -20,6 +20,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
+        send_message_to_all(@message) 
         format.html { redirect_to message_url(@message), notice: "Message was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -46,6 +47,11 @@ class MessagesController < ApplicationController
   end
 
   private
+    def send_message_to_all(message) 
+      ## Main room is the room we would like to broadcast to and we can pass an object with the information we want to be sent.
+      ActionCable.server.broadcast("main_room", { message: message })
+    end
+
     def set_message
       @message = Message.find(params[:id])
     end
