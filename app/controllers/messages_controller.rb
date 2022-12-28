@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
   before_action :set_message, only: %i[ show edit update destroy ]
 
   def index
-    @messages = Message.all
+   @messages = Message.all
   end
 
   def show
@@ -22,6 +22,7 @@ class MessagesController < ApplicationController
       if @message.save
         send_message_to_all(@message) 
         format.html { redirect_to message_url(@message), notice: "Message was successfully created." }
+        format.turbo_stream
       else
         format.html { render :new, status: :unprocessable_entity }
       end

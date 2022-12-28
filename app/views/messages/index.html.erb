@@ -1,15 +1,17 @@
-<div class="w-full">
-  <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-  <% end %>
+<div class="w-full pt-8 min-h-screen" data-controller='websocket-message'>
+<% if notice.present? %>
+  <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+<% end %>
+  <h1 class="font-bold text-4xl fixed top-0 left-0 right-0 bg-white shadow-xl">Main Room</h1>
 
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Messages</h1>
-    <%= link_to 'New message', new_message_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+  <div class='overflow-auto py-8 mb-20'>
+    <div id="messages" class="min-w-full overflow-auto " data-websocket-message-target='messages'>
+      <%= render @messages %>
+    </div>
   </div>
 
-  <div id="messages" class="min-w-full" data-controller='websocket-message'>
-    <%= render @messages %>
+  <div class='bg-white fixed bottom-0 left-0 right-0 px-4'>
+    <%= render "form", message: Message.new %>
   </div>
 </div>
 

@@ -11,12 +11,9 @@
     </div>
   <% end %>
 
-  <div class="my-5">
-    <%= form.label :title %>
-    <%= form.text_field :title, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  <div class="my-5 sm:flex sm:gap-6 sm:items-center lg:container lg:mx-auto">
+    <%= form.text_field :title, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 my-2 w-full", autocomplete: 'off', data: { 'websocket-message-target':'textbox' } %>
+    <%= form.submit 'Send', class: "rounded-lg py-3 px-5 bg-emerald-500 hover:bg-emerald-600 text-white block font-medium cursor-pointer w-full sm:w-48 sm:py-2" %>
   </div>
 
-  <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
-  </div>
 <% end %>
