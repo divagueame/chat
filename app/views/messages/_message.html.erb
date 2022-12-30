@@ -1,5 +1,7 @@
-<div id="<%= dom_id message %>">
-  <span class="bg-white rounded-md px-4 py-1 mb-2 inline-block shadow-md">
+<div id="<%= dom_id message %>" class="flex <%= current_user.id === message.user.id ? "justify-end" : "justify-start" %>"
+ data-user-id="<%= message.user.id %>" >
+    <span class="bg-white rounded-md px-4 py-1 mb-2 inline-block shadow-md">
+    <% message.user.email %>
     <%= message.title %>
   </span>
 </div>

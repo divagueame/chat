@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_message, only: %i[ show edit update destroy ]
 
   def index
@@ -17,6 +18,7 @@ class MessagesController < ApplicationController
 
   def create
     @message = Message.new(message_params)
+    @message.user_id = current_user.id
 
     respond_to do |format|
       if @message.save
@@ -50,7 +52,7 @@ class MessagesController < ApplicationController
   private
     def send_message_to_all(message) 
       ## Main room is the room we would like to broadcast to and we can pass an object with the information we want to be sent.
-      ActionCable.server.broadcast("main_room", { html: html(message) })
+      ActionCable.server.broadcast("main_room", { html: html(message), user: current_user.id })
     end
 
     def html(message)
