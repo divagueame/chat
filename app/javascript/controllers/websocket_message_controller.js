@@ -14,15 +14,18 @@ export default class extends Controller {
 	  createConsumer().subscriptions.create( 
 		  { channel: "MessagesChannel", room: "main_room"},
 		  { received: (data) =>  {
-		    const colorClass = this.userValue === data.user ? 'justify-end' : 'justify-start';
-		    const doc = new DOMParser().parseFromString(data.html, 'text/html');
-		    const div = doc.querySelector('div');
-		    div.classList.add(colorClass);
+		     const colorClass = (this.userValue === data.user) ? 'justify-end' : 'justify-start';
+		     const positionClass = (this.userValue === data.user) ? 'bg-red-200' : 'bg-green-100';
+		     const doc = new DOMParser().parseFromString(data.html, 'text/html');
+		     const div = doc.querySelector('div');
+		     div.classList.remove('justify-end');
+		     div.classList.remove('justify-start');
+		     div.classList.add(colorClass);
+		     div.classList.add(positionClass);
+		     messagesDiv.insertAdjacentElement('beforeend', div);
 
-		    messagesDiv.insertAdjacentElement('beforeend', div);
-
-		    messagesDiv.lastElementChild.scrollIntoView()
-		    textbox.value = ''
+		     messagesDiv.lastElementChild.scrollIntoView()
+		     textbox.value = ''
 		  }
 		}
 	  )
