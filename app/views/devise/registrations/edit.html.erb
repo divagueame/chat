@@ -31,8 +31,21 @@
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
+
+  <div class="input-group">
+  <% if resource.avatar.attached? %>
+    <%= image_tag url_for(resource.avatar_thumbnail), class: "rounded" %>
+    <%= f.file_field :avatar %>
+  <% else %>
+    <%= image_tag('default_avatar.svg', class: "rounded w-16") %>
+  <% end %>
+
+    <%= f.file_field :avatar %>
+</div>
+
+
   <div class="actions">
-    <%= f.submit "Update" %>
+    <%= f.submit "Update", class: 'btn' %>
   </div>
 <% end %>
 

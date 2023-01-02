@@ -1,6 +1,6 @@
 <div id="<%= dom_id message %>" class="flex <%= current_user.id === message.user.id ? "justify-end" : "justify-start" %>"
  data-user-id="<%= message.user.id %>" >
-    <span class="rounded-md px-4 py-1 mb-2 inline-block shadow-md <%= current_user.id === message.user.id ? 'bg-orange-200' : 'bg-green-200' %>"
+    <span class="rounded-md px-4 py-1 mb-2 inline-block shadow-md <%= current_user.id === message.user.id ? 'bg-orange-20' : 'bg-green-200' %>"
   >
     <% message.user.email %>
     <%= message.title %>
