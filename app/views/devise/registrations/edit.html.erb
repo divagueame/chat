@@ -31,13 +31,22 @@
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
+  <div class="flex gap-2">
+    <%= f.label "icon" %>
+    <% (0..8).to_a.each do |i| %>
+      <%= f.radio_button :icon, i, id: "icon-#{i}", class: "hidden" %>
+      <%= label_tag "icon-#{i}", class: "icon-button rounded-full bg-gray-300 hover:bg-gray-400 p-2" do %>
+        <%= image_tag "icons/#{i}.svg", class: "icon-thumbnail" %>
+      <% end %>
+    <% end %>
+  </div>
 
   <div class="input-group">
   <% if resource.avatar.attached? %>
     <%= image_tag url_for(resource.avatar_thumbnail), class: "rounded" %>
     <%= f.file_field :avatar %>
   <% else %>
-    <%= image_tag('default_avatar.svg', class: "rounded w-16") %>
+    <%= image_tag('icons/default.svg', class: "rounded w-16") %>
   <% end %>
 
     <%= f.file_field :avatar %>
@@ -48,9 +57,11 @@
     <%= f.submit "Update", class: 'btn' %>
   </div>
 <% end %>
+<br><hr>
+<div class="py-12">
+  <h3>Cancel my account</h3>
 
-<h3>Cancel my account</h3>
+  <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+  <%= link_to "Back", :back %>
+</div>
