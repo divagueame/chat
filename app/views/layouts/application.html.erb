@@ -11,7 +11,14 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+    <%= turbo_frame_tag 'modal' %>
+
+    <%= link_to "Edit!", edit_user_registration_path, class: 'bg-purple-200 p-2 block w-min', data: { turbo_frame: 'modal' } %>
+    <div class='z-50 hidden bg-red-200 fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center'>
+      <h1>Modal</h1>
+    </div>
+
+  <body class='pt-12'>
     <%= render partial: 'partials/nav' %>
     <main class="container mx-auto px-5 min-h-screen">
       <%= yield %>

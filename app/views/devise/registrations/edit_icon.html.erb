@@ -1,0 +1,19 @@
+<%= turbo_frame_tag 'modal' do %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+ <div class="flex gap-2">
+    <%= f.label "icon" %>
+    <% (0..8).to_a.each do |i| %>
+      <%= f.radio_button :icon, i, id: "icon-#{i}", class: "hidden" %>
+      <%= label_tag "icon-#{i}", class: "icon-button rounded-full bg-gray-300 hover:bg-gray-400 p-2" do %>
+        <%= image_tag "icons/#{i}.svg", class: "icon-thumbnail" %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Update", class: 'btn' %>
+  </div>
+<% end %>
+<% end %>
