@@ -24,12 +24,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @resource = current_user
   end
 
-
+  def update_icon
+    new_icon = params[:user][:icon]
+    if current_user.update(icon: new_icon)
+      p "UPDATE!"
+    else
+      p "NOT UPDATED!"
+    end
+  end
 
   # PUT /resource
   # def update
-  #   super
-  # end
+  # # super
+  #end
 
   # DELETE /resource
   # def destroy
