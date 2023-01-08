@@ -3,7 +3,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
-
+   before_action :ensure_frame_response, only: [:edit_icon, :update_icon]
   # GET /resource/sign_up
   # def new
   #   super
@@ -26,11 +26,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def update_icon
     new_icon = params[:user][:icon]
-    if current_user.update(icon: new_icon)
-      p "UPDATE!"
-    else
-      p "NOT UPDATED!"
-    end
+    current_user.update(icon: new_icon)
+
+     # format.turbo_stream
   end
 
   # PUT /resource
@@ -52,7 +50,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
+  
+  def ensure_frame_response
+    return unless Rails.env.development?
+    redirect_to root_path unless turbo_frame_request?
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params

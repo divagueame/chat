@@ -1,19 +1,17 @@
 <%= turbo_frame_tag 'modal' do %>
-
-  <%= form_for(@resource, url: users_edit_icon_path, data: { turbo: false }, html: { method: :put }) do |f| %>
-
-   <div class="flex gap-2">
-      <%= f.label "icon" %>
-      <% (0..8).to_a.each do |i| %>
+  <div class="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center z-50 bg-zinc-900/50 px-20" data-controller="modal" data-modal-target="modal" >
+  <%= form_for(@resource, url: users_edit_icon_path, class: "flex justify-center items-center relative", data: { action: "turbo:submit-end->modal#submitEnd" }, html: { method: :put }) do |f| %>
+   <div class="relative flex gap-2 flex-wrap items-center justify-center w-96 bg-white rounded-sm shadow-sm p-4">
+     <span class="absolute p-2 -right- top-0 bg-pink-400" data-action="click->modal#hideModal">&times;</span>
+     <% (0..8).to_a.each do |i| %>
         <%= f.radio_button :icon, i, id: "icon-#{i}", class: "hidden" %>
-        <%= label_tag "icon-#{i}", class: "icon-button rounded-full bg-gray-300 hover:bg-gray-400 p-2" do %>
+        <%= label_tag "icon-#{i}", class: "icon-button basis-1/5 rounded-full bg-gray-300 hover:bg-gray-400 p9-2" do %>
           <%= image_tag "icons/#{i}.svg", class: "icon-thumbnail" %>
         <% end %>
       <% end %>
     </div>
 
-    <div class="actions">
-      <%= f.submit "Update", class: 'btn' %>
-    </div>
+    <%= f.submit "Save", class: 'btn' %>
   <% end %>
+  </div>
 <% end %>
