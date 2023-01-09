@@ -1,17 +1,17 @@
 <%= turbo_frame_tag 'modal' do %>
-  <div class="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center z-50 bg-zinc-900/50 px-20" data-controller="modal" data-modal-target="modal" >
+  <div class="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center z-50 bg-zinc-900/50 px-20  shadow-xl " data-controller="modal" data-modal-target="modal" >
   <%= form_for(@resource, url: users_edit_icon_path, class: "flex justify-center items-center relative", data: { action: "turbo:submit-end->modal#submitEnd" }, html: { method: :put }) do |f| %>
-   <div class="relative flex gap-2 flex-wrap items-center justify-center w-96 bg-white rounded-sm shadow-sm p-4">
-     <span class="absolute p-2 -right- top-0 bg-pink-400" data-action="click->modal#hideModal">&times;</span>
+   <div class="relative flex gap-2 flex-wrap items-center justify-center w-96 bg-white rounded-sm p-12">
+     <span class="absolute p-3 text-3xl -right-0 top-0 hover:cursor-pointer hover:opacity-75" data-action="click->modal#hideModal">&times;</span>
      <% (0..8).to_a.each do |i| %>
         <%= f.radio_button :icon, i, id: "icon-#{i}", class: "hidden" %>
-        <%= label_tag "icon-#{i}", class: "icon-button basis-1/5 rounded-full bg-gray-300 hover:bg-gray-400 p9-2" do %>
+        <%= label_tag "icon-#{i}", class: "icon-button basis-1/4 rounded-full p-2 hover:cursor-pointer hover:bg-purple-100" do %>
           <%= image_tag "icons/#{i}.svg", class: "icon-thumbnail" %>
         <% end %>
       <% end %>
     </div>
 
-    <%= f.submit "Save", class: 'btn' %>
+    <%= f.submit "Save", class: 'btn bg-green-200 hover:bg-green-300  w-full hover:cursor-pointer' %>
   <% end %>
   </div>
 <% end %>
