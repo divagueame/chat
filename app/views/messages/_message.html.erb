@@ -1,8 +1,9 @@
-<div id="<%= dom_id message %>" class="flex <%= current_user.id === message.user.id ? "justify-end" : "justify-start" %>"
+<div id="<%= dom_id message %>" class="flex items-center gap-4 <%= current_user.id === message.user.id ? "justify-end" : "justify-start" %>"
  data-user-id="<%= message.user.id %>" >
-    <span class="rounded-md px-4 py-1 mb-2 inline-block shadow-md <%= current_user.id === message.user.id ? 'bg-orange-20' : 'bg-green-200' %>"
+    <span class="rounded-md px-4 py-1 my-2 inline-block shadow-md <%= current_user.id === message.user.id ? 'bg-orange-20' : 'bg-green-200' %>"
   >
     <% message.user.email %>
     <%= message.title %>
   </span>
+    <%= image_tag "icons/#{message.user.icon}.svg", class: "w-8" %>
 </div>

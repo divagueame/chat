@@ -6,7 +6,9 @@
   <% if current_user %>
     <%= link_to 'Log out', destroy_user_session_path, data: { "turbo-method": :delete }, class: "btn" %>
     <% link_to 'Edit', edit_user_registration_path, class: "btn" %>
-    <%= link_to "Edit", users_edit_icon_path, class: 'bg-purple-200 p-2 block w-min', data: { turbo_frame: 'modal' } %>
+    <%= link_to users_edit_icon_path, class: 'dbg-purple-200 p-2 block', data: { turbo_frame: 'modal' } do %>
+          <%= image_tag "icons/#{current_user.icon}.svg", class: "block w-8" %>
+    <% end %>
 <% else %>
   <%= link_to 'Sign in', new_user_registration_path, class: "btn" %>
   <%= link_to 'Log in', new_user_session_path, class: "btn" %>
