@@ -28,7 +28,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     new_icon = params[:user][:icon]
     current_user.update(icon: new_icon)
 
-     # format.turbo_stream
+
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: "Avatar updated!" }
+    end
   end
 
   # PUT /resource
